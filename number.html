@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP API Fetch Example</title>
+</head>
+<body>
+    <h1>API Response</h1>
+    <div id="result"></div>
+
+    <script>
+        // Replace with the number you want to send
+        const numberToSend = 5; // Example: sending the number 5
+
+        // Fetch data from the API, passing the number as a query parameter
+        fetch(`https://timmeeuwsen.nl/number.php?number=${numberToSend}`)
+            .then(response => response.json())
+            .then(data => {
+                // Display the fetched data
+                document.getElementById('result').innerHTML = 
+                    `<p>Message: ${data.message}</p>
+                    <p>Status: ${data.status}</p>
+                    <p>Input Number: ${data.input_number}</p>
+                    <p>Output Number: ${data.output_number}</p>
+                    <p>Timestamp: ${data.timestamp}</p>`;
+            })
+            .catch(error => {
+                // Handle any errors
+                console.error('Error fetching data:', error);
+            });
+    </script>
+</body>
+</html>
