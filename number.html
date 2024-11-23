@@ -7,14 +7,30 @@
 </head>
 <body>
     <h1>API Response</h1>
+    <form id="numberForm">
+        <label for="numberInput">Enter a number:</label>
+        <input type="number" id="numberInput" name="number" required>
+        <button type="submit">Submit</button>
+    </form>
+
     <div id="result"></div>
 
     <script>
-        // Replace with the number you want to send
-        const numberToSend = 5; // Example: sending the number 5
+        // Handle form submission
+        document.getElementById('numberForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
 
-        // Fetch data from the API, passing the number as a query parameter
-        fetch(`https://timmeeuwsen.nl/number.php?number=${numberToSend}`)
+            // Get the number from the input field
+            const number = document.getElementById('numberInput').value;
+
+            // Send the number to the PHP script using Fetch API
+            fetch('https://timmeeuwsen.nl/number.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `number=${number}` // Send the number as form data
+            })
             .then(response => response.json())
             .then(data => {
                 // Display the fetched data
@@ -29,6 +45,7 @@
                 // Handle any errors
                 console.error('Error fetching data:', error);
             });
+        });
     </script>
 </body>
 </html>
